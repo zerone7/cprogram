@@ -48,8 +48,8 @@ void infix_to_suffix(char *instr, char *outstr)
             while ((a >= '0' && a <= '9') || (a >= 'a' && a <= 'z')) {
                 outstr[j] = a;
                 j++; 
-                a = instr[i];
                 i++;
+                a = instr[i];
             }
             i--;
             outstr[j] = ' '; //just add blanck char
