@@ -38,22 +38,25 @@ static inline int prio(char operator)
 void infix_to_suffix(char *instr, char *outstr)
 {
     int len, i, j = 0;
+    char a;
 
     assert(instr && outstr);
     len = strlen(instr);
     for (i = 0; i < len; i++) {
-        if ((instr[i] >= '0' && instr[i] <= '9') || (instr[i] >= 'a' && instr[i] <= 'z')) {
-            while ((instr[i] >= '0' && instr[i] <= '9') || (instr[i] >= 'a' && instr[i] <= 'z')) {
-                outstr[j] = instr[i];
+        a = instr[i];
+        if ((a >= '0' && a <= '9') || (a >= 'a' && a <= 'z')) {
+            while ((a >= '0' && a <= '9') || (a >= 'a' && a <= 'z')) {
+                outstr[j] = a;
                 j++; 
+                a = instr[i];
                 i++;
             }
             i--;
             outstr[j] = ' '; //just add blanck char
             j++;
-        } else if (instr[i] == '(') {
-            push(pstack, instr[i]);
-        } else if (instr[i] == ')') {
+        } else if (a == '(') {
+            push(pstack, a);
+        } else if (a == ')') {
             while (top(pstack) != '(') {
                 if (top(pstack) == '\0')
                     return;
@@ -65,14 +68,14 @@ void infix_to_suffix(char *instr, char *outstr)
                 }
             }
             pop(pstack);
-        } else if (instr[i] == '+' || instr[i] == '-' || instr[i] == '*' || instr[i] == '/') {
-            while (top(pstack) != '\0' && prio(top(pstack)) >= prio(instr[i])) {
+        } else if (a == '+' || a == '-' || a == '*' || a == '/') {
+            while (top(pstack) != '\0' && prio(top(pstack)) >= prio(a)) {
                 outstr[j] = pop(pstack);
                 j++;
                 outstr[j] = ' '; //just add blanck char
                 j++;
             }
-            push(pstack, instr[i]);
+            push(pstack, a);
         }
     }
 
