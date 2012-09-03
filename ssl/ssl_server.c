@@ -1,6 +1,6 @@
 /*
  * Compile command:
- * gcc ssl_client.c -o client -I/usr/local/ssl/include -lcrypto -lssl
+ * gcc ssl_server.c -o server -I/usr/local/ssl/include -lcrypto -lssl
  *
  * To gernerate key files:
  * openssl genrsa -out privkey.pem 2048
